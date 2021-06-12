@@ -10,6 +10,9 @@ import UIKit
 class TestCell: UITableViewCell {
 
     @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var checkBoxButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -16,7 +16,9 @@ struct WorkTask: Hashable {
 
 struct OwnTask: Hashable {
     var title: String
-    var date: Date?
+    var body: String
+    var date: Date
+    var identifier: String
     var isChecked = false
 }
 
@@ -28,17 +30,17 @@ struct Case: Hashable {
 
 class Section {
     
-    var ownItem = [
-        OwnTask(title: "My task1"),
-        OwnTask(title: "My task2"),
-        OwnTask(title: "My task3"),
-        OwnTask(title: "My task4"),
-        OwnTask(title: "My task5"),
-        OwnTask(title: "My task6"),
-        OwnTask(title: "My task7"),
-        OwnTask(title: "My task8")
-                   
-    ]
+//    var ownItem = [
+//        OwnTask(title: "My task1"),
+//        OwnTask(title: "My task2"),
+//        OwnTask(title: "My task3"),
+//        OwnTask(title: "My task4"),
+//        OwnTask(title: "My task5"),
+//        OwnTask(title: "My task6"),
+//        OwnTask(title: "My task7"),
+//        OwnTask(title: "My task8")
+//
+//    ]
     
     var workTask = [
         WorkTask(title: "Work task1"),

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainScreenCollectionViewCell" id="gTV-IL-0wX" customClass="MainScreenCollectionViewCell" customModule="InvestigatorApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQY-7S-ytK">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#32223444" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2A-a1-M3W">
+                                <rect key="frame" x="8" y="203.5" width="184" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="ИвановИван Иванович, Петров Петр Петрович" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYR-uR-kb6">
+                                <rect key="frame" x="8" y="8" width="184" height="187.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="I2A-a1-M3W" secondAttribute="trailing" constant="8" id="3tj-ou-Oen"/>
+                            <constraint firstAttribute="bottom" secondItem="I2A-a1-M3W" secondAttribute="bottom" constant="8" id="P4F-zA-qc4"/>
+                            <constraint firstItem="I2A-a1-M3W" firstAttribute="top" secondItem="pYR-uR-kb6" secondAttribute="bottom" constant="8" id="RaF-ie-AYg"/>
+                            <constraint firstItem="I2A-a1-M3W" firstAttribute="leading" secondItem="aQY-7S-ytK" secondAttribute="leading" constant="8" id="Y79-5M-gYm"/>
+                            <constraint firstAttribute="trailing" secondItem="pYR-uR-kb6" secondAttribute="trailing" constant="8" id="Ymo-aT-5z9"/>
+                            <constraint firstItem="pYR-uR-kb6" firstAttribute="top" secondItem="aQY-7S-ytK" secondAttribute="top" constant="8" id="ruF-pf-rLp"/>
+                            <constraint firstItem="pYR-uR-kb6" firstAttribute="leading" secondItem="aQY-7S-ytK" secondAttribute="leading" constant="8" id="sDX-Il-pyr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="aQY-7S-ytK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3qF-vI-EuP"/>
+                <constraint firstItem="aQY-7S-ytK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="G1g-gG-ykn"/>
+                <constraint firstAttribute="bottom" secondItem="aQY-7S-ytK" secondAttribute="bottom" id="G9E-Bc-ccM"/>
+                <constraint firstAttribute="trailing" secondItem="aQY-7S-ytK" secondAttribute="trailing" id="sIf-d0-h5z"/>
+            </constraints>
+            <size key="customSize" width="156" height="204"/>
+            <connections>
+                <outlet property="caseNameLabel" destination="pYR-uR-kb6" id="Aib-LK-0jH"/>
+                <outlet property="caseNumberLabel" destination="I2A-a1-M3W" id="BBm-Ua-4QV"/>
+                <outlet property="cellview" destination="aQY-7S-ytK" id="n20-4r-sth"/>
+            </connections>
+            <point key="canvasLocation" x="188.40579710144928" y="135.9375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
