@@ -21,7 +21,10 @@ class AddTaskViewController: UIViewController {
         super.viewDidLoad()
         titleTextField.delegate = self
         bodyTextField.delegate = self
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(didTapSaveButton))
+        
+        
 
         // Do any additional setup after loading the view.
     }

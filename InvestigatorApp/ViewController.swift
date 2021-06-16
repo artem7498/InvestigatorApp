@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var models = [OwnTask]()
+    
 
     @IBOutlet weak var ownTaskTableView: UITableView!
     @IBOutlet weak var ownTaskTableHeight: NSLayoutConstraint!
@@ -53,28 +54,31 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    
+    
+    
     @IBAction func didTapAddButton(_ sender: Any) {
         
-        guard let vc = storyboard?.instantiateViewController(identifier: "AddViewCoontroller") as? AddTaskViewController else {return}
+        guard let vc = storyboard?.instantiateViewController(identifier: "TaskEditorTableViewController") as? TaskEditorTableViewController else {return}
         vc.title = "Личная задача"
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = {title, body, date, push in
+        vc.completion = {[unowned self] title, body, date, push in
             DispatchQueue.main.async {
                 self.navigationController?.popToRootViewController(animated: true)
                 let new = OwnTask(title: title, body: body, date: date, identifier: "id_\(title)")
                 print(new)
                 self.models.append(new)
                 self.ownTaskTableView.reloadData()
-                
+
                 if push == true{
                     let content = UNMutableNotificationContent()
                     content.title = title
                     content.sound = .default
                     content.body = body
-                    
+
                     let targetDate = date
                     let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: targetDate), repeats: false)
-                    let request = UNNotificationRequest(identifier: "some_long_id", content: content, trigger: trigger)
+                    let request = UNNotificationRequest(identifier: new.identifier, content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request) { error in
                         if error != nil {
                             print("something went wrong \(error.debugDescription)")
@@ -107,7 +111,7 @@ class ViewController: UIViewController {
             if let newValue = change?[.newKey]{
                 let newSize = newValue as! CGSize
                 self.ownTaskTableHeight.constant = newSize.height
-                print("adjust")
+//                print("adjust")
             }
         }
         
@@ -116,7 +120,7 @@ class ViewController: UIViewController {
             if let newValue = change?[.newKey]{
                 let newSize = newValue as! CGSize
                 self.workTaskTableHeight.constant = newSize.height
-                print("adjusted")
+//                print("adjusted")
             }
         }
     }
@@ -163,6 +167,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1{
+//            let today = models.filter{ item in item.date > Date().endOfDay}
             return models.count
         } else if tableView.tag == 2{
             return 10
@@ -186,6 +191,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
         let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenTableViewCell.reuseId, for: indexPath) as! MainScreenTableViewCell
 
             if tableView.tag == 1{
+                
+//                let today = models.filter{ item in item.date > Date().endOfDay}
                 
                 cell.delegate = self
                 cell.titleLabel?.text = models[indexPath.row].title
@@ -227,6 +234,55 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
 
         return headerView
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView.tag == 1{
+            
+            let selectedIndexPath = ownTaskTableView.indexPathForSelectedRow
+            
+            guard let vc = storyboard?.instantiateViewController(identifier: "TaskEditorTableViewController") as? TaskEditorTableViewController else {return}
+            vc.title = "Личная задача"
+            vc.navigationItem.largeTitleDisplayMode = .never
+//            vc.titleTextField.text = models[selectedIndexPath!.row].title
+            vc.toDoItem = models[selectedIndexPath!.row]
+            
+            vc.completion = {[unowned self] title, body, date, push in
+                DispatchQueue.main.async {
+                    self.navigationController?.popToRootViewController(animated: true)
+                    let new = OwnTask(title: title, body: body, date: date, identifier: "id_\(title)")
+                    print(new)
+//                    проверить старые уведомления здесь со старыми значениями
+//                    добавить проверку на выполнение isChecked
+                    self.models[selectedIndexPath!.row] = new
+                    self.ownTaskTableView.reloadData()
+
+                    if push == true{
+                        let content = UNMutableNotificationContent()
+                        content.title = title
+                        content.sound = .default
+                        content.body = body
+
+                        let targetDate = date
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: targetDate), repeats: false)
+                        let request = UNNotificationRequest(identifier: new.identifier, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request) { error in
+                            if error != nil {
+                                print("something went wrong \(error.debugDescription)")
+                            }
+                        }
+                    }
+                }
+            }
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else if tableView.tag == 2{
+            
+        }
+
+        
+//        performSegue(withIdentifier: "ShowDetail", sender: self)
     }
     
 }

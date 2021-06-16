@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol  MainScreenTableViewCellDelegate: class {
+protocol  MainScreenTableViewCellDelegate: AnyObject {
     func checkBoxToggle(sender: MainScreenTableViewCell)
 }
 
@@ -26,7 +26,7 @@ class MainScreenTableViewCell: UITableViewCell {
     static func nib() -> UINib{
         return UINib(nibName: "MainScreenTableViewCell", bundle: nil)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
