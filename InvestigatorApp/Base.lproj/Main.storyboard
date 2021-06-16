@@ -23,7 +23,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYx-42-gUs">
-                                                <rect key="frame" x="8" y="8" width="398" height="200"/>
+                                                <rect key="frame" x="0.0" y="8" width="414" height="200"/>
                                                 <color key="backgroundColor" red="0.52982742520000004" green="0.71659912209999999" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="qif-is-umH"/>
@@ -116,18 +116,18 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <color key="backgroundColor" red="0.200555712" green="0.46699684860000001" blue="0.45098239179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="kch-RQ-5Fc" firstAttribute="top" secondItem="FYx-42-gUs" secondAttribute="bottom" constant="8" id="0AP-u7-EbV"/>
                                             <constraint firstItem="FYx-42-gUs" firstAttribute="top" secondItem="xJq-ac-kLu" secondAttribute="top" constant="8" id="CdC-8e-Bbr"/>
                                             <constraint firstAttribute="trailing" secondItem="kch-RQ-5Fc" secondAttribute="trailing" constant="8" id="Dxv-aA-dqQ"/>
                                             <constraint firstAttribute="trailing" secondItem="2yy-zI-kIr" secondAttribute="trailing" constant="8" id="ICY-1N-jrV"/>
-                                            <constraint firstAttribute="trailing" secondItem="FYx-42-gUs" secondAttribute="trailing" constant="8" id="JTs-P3-Zoj"/>
+                                            <constraint firstAttribute="trailing" secondItem="FYx-42-gUs" secondAttribute="trailing" id="JTs-P3-Zoj"/>
                                             <constraint firstItem="2yy-zI-kIr" firstAttribute="leading" secondItem="xJq-ac-kLu" secondAttribute="leading" constant="8" id="ZfR-d9-isA"/>
                                             <constraint firstItem="mLY-ge-AiG" firstAttribute="top" secondItem="2yy-zI-kIr" secondAttribute="bottom" constant="8" id="bug-jO-27Y"/>
                                             <constraint firstItem="mLY-ge-AiG" firstAttribute="leading" secondItem="xJq-ac-kLu" secondAttribute="leading" id="ddr-mQ-BO3"/>
                                             <constraint firstItem="2yy-zI-kIr" firstAttribute="top" secondItem="kch-RQ-5Fc" secondAttribute="bottom" constant="8" id="eU4-Np-NJL"/>
-                                            <constraint firstItem="FYx-42-gUs" firstAttribute="leading" secondItem="xJq-ac-kLu" secondAttribute="leading" constant="8" id="hqZ-rc-eDe"/>
+                                            <constraint firstItem="FYx-42-gUs" firstAttribute="leading" secondItem="xJq-ac-kLu" secondAttribute="leading" id="hqZ-rc-eDe"/>
                                             <constraint firstAttribute="bottom" secondItem="mLY-ge-AiG" secondAttribute="bottom" constant="8" id="vjN-tO-K0U"/>
                                             <constraint firstItem="kch-RQ-5Fc" firstAttribute="leading" secondItem="xJq-ac-kLu" secondAttribute="leading" constant="8" id="zWE-aS-ZSm"/>
                                             <constraint firstAttribute="trailing" secondItem="mLY-ge-AiG" secondAttribute="trailing" id="zX5-HX-ssq"/>
@@ -244,12 +244,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXH-23-apR">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pXH-23-apR">
                                                     <rect key="frame" x="305" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="eCl-k8-6BA"/>
                                                         <constraint firstAttribute="width" constant="49" id="fKX-bn-Kbk"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="pushIsOnSwitchChanged:" destination="eUp-y0-xWK" eventType="valueChanged" id="6PW-u1-bvk"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Уведомление" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPP-GO-it5">
                                                     <rect key="frame" x="20" y="11.5" width="277" height="21"/>
@@ -282,7 +285,6 @@
                                                     <rect key="frame" x="20" y="0.0" width="334" height="200"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -458,9 +460,6 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -15,13 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            guard granted else { return }
-            self.notificationCenter.getNotificationSettings { settings in
-                print(settings)
-                guard settings.authorizationStatus == .authorized else {return}
-            }
-        }
+        UNUserNotificationCenter.current().delegate = self
         // Override point for customization after application launch.
         return true
     }
@@ -41,5 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let id = notification.request.identifier
+        print("Recieved in-appnotification with ID = \(id)")
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        completionHandler([.list, .banner, .sound])
+    }
 }
 

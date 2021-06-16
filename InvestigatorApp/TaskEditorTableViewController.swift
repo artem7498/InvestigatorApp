@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 class TaskEditorTableViewController: UITableViewController {
     
@@ -15,12 +16,15 @@ class TaskEditorTableViewController: UITableViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pushIsOnSwitch: UISwitch!
     
-    public var completion: ((String, String, Date, Bool) -> Void)?
+    public var completion: ((OwnTask) -> Void)?
     
     var toDoItem: OwnTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         hideKeyboardOnTap()
         titleTextField.delegate = self
@@ -28,17 +32,39 @@ class TaskEditorTableViewController: UITableViewController {
         updateUserInterface()
     }
     
+    @objc func appActiveNotification(){
+        print("The app just came to foreground")
+        updateReminderSwitch()
+    }
+    
     func updateUserInterface(){
         if toDoItem != nil{
             titleTextField.text = toDoItem?.title
             bodyTextField.text = toDoItem?.body
             datePicker.date = toDoItem!.date
+            pushIsOnSwitch.isOn = toDoItem!.reminderSet
         } else {
             titleTextField.becomeFirstResponder()
         }
-        
+        updateReminderSwitch()
         enableDisableSaveButton(text: titleTextField.text!)
     }
+    
+    func updateReminderSwitch(){
+        LocalNotificationManager.isAuthorized { authorized in
+            DispatchQueue.main.async {
+                if !authorized && self.pushIsOnSwitch.isOn{
+                    self.oneButtonAlert(title: "Push отключены", message: "Чтобы получать напоминания и уведомления о предстоящих событиях, перейдите в Настройки, выберите Ежедневник Следователя > Уведомления > Разрешить уведомления ")
+                    self.pushIsOnSwitch.isOn = false
+                }
+            }
+        }
+    }
+    
+    @IBAction func pushIsOnSwitchChanged(_ sender: Any) {
+        updateReminderSwitch()
+    }
+    
     
     func enableDisableSaveButton(text: String){
         if text.count > 0 {
@@ -50,13 +76,21 @@ class TaskEditorTableViewController: UITableViewController {
     
     @IBAction func saveButton(_ sender: Any) {
         if let titleText = titleTextField.text, !titleText.isEmpty,
-           let bodyText = bodyTextField.text, !bodyText.isEmpty{
+           let bodyText = bodyTextField.text{
             
             let targetDate = datePicker.date
             let pushIsOn = pushIsOnSwitch.isOn
             
-            completion?(titleText, bodyText, targetDate, pushIsOn)
+            if toDoItem == nil {
+                toDoItem = OwnTask(title: titleText, body: bodyText, date: targetDate, reminderSet: pushIsOn)
+            } else {
+                toDoItem?.title = titleText
+                toDoItem?.body = bodyText
+                toDoItem?.date = targetDate
+                toDoItem?.reminderSet = pushIsOn
+            }
             
+            completion?(toDoItem!)
             toDoItem = nil
         }
     }

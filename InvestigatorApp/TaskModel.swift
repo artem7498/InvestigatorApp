@@ -18,7 +18,8 @@ struct OwnTask: Hashable {
     var title: String
     var body: String
     var date: Date
-    var identifier: String
+    var reminderSet: Bool
+    var notificationID: String?
     var isChecked = false
 }
 

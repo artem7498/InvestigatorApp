@@ -5,12 +5,13 @@
 //  Created by Артём on 6/8/21.
 //
 
-import UserNotifications
+//import UserNotifications
 import UIKit
 
 class ViewController: UIViewController {
     
-    var models = [OwnTask]()
+//    var models = [OwnTask]()
+    var ownTaskItems = OwnTaskItems.shared
     
 
     @IBOutlet weak var ownTaskTableView: UITableView!
@@ -34,62 +35,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        ownTaskTableView.register(MainScreenTableViewCell.nib(), forCellReuseIdentifier: MainScreenTableViewCell.reuseId)
-        workTaskTableView.register(MainScreenTableViewCell.nib(), forCellReuseIdentifier: MainScreenTableViewCell.reuseId)
-        self.ownTaskTableView.layer.cornerRadius = 10
-        self.workTaskTableView.layer.cornerRadius = 10
+        setupTableViews()
         
+        LocalNotificationManager.autherizeLocalNotifications(viewController: self)
         // Do any additional setup after loading the view.
     }
-    
-    func setupCollectionView(){
-        topViewForCollection.addSubview(collectionView)
-        collectionView.backgroundColor = .white
-        collectionView.topAnchor.constraint(equalTo: topViewForCollection.topAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: topViewForCollection.bottomAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: topViewForCollection.trailingAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: topViewForCollection.leadingAnchor).isActive = true
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
-    
-    
-    
-    @IBAction func didTapAddButton(_ sender: Any) {
-        
-        guard let vc = storyboard?.instantiateViewController(identifier: "TaskEditorTableViewController") as? TaskEditorTableViewController else {return}
-        vc.title = "Личная задача"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = {[unowned self] title, body, date, push in
-            DispatchQueue.main.async {
-                self.navigationController?.popToRootViewController(animated: true)
-                let new = OwnTask(title: title, body: body, date: date, identifier: "id_\(title)")
-                print(new)
-                self.models.append(new)
-                self.ownTaskTableView.reloadData()
-
-                if push == true{
-                    let content = UNMutableNotificationContent()
-                    content.title = title
-                    content.sound = .default
-                    content.body = body
-
-                    let targetDate = date
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: targetDate), repeats: false)
-                    let request = UNNotificationRequest(identifier: new.identifier, content: content, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request) { error in
-                        if error != nil {
-                            print("something went wrong \(error.debugDescription)")
-                        }
-                    }
-                }
-            }
-        }
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -102,6 +52,43 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.workTaskTableView.removeObserver(self, forKeyPath: "contentSize")
         self.ownTaskTableView.removeObserver(self, forKeyPath: "contentSize")
+    }
+    
+    func setupCollectionView(){
+        topViewForCollection.addSubview(collectionView)
+        collectionView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        collectionView.topAnchor.constraint(equalTo: topViewForCollection.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: topViewForCollection.bottomAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: topViewForCollection.trailingAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: topViewForCollection.leadingAnchor).isActive = true
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    func setupTableViews(){
+        ownTaskTableView.register(MainScreenTableViewCell.nib(), forCellReuseIdentifier: MainScreenTableViewCell.reuseId)
+        workTaskTableView.register(MainScreenTableViewCell.nib(), forCellReuseIdentifier: MainScreenTableViewCell.reuseId)
+        self.ownTaskTableView.layer.cornerRadius = 10
+        self.workTaskTableView.layer.cornerRadius = 10
+    }
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        
+        guard let vc = storyboard?.instantiateViewController(identifier: "TaskEditorTableViewController") as? TaskEditorTableViewController else {return}
+        vc.title = "Личная задача"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.completion = {[unowned self] newItem in
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+//                let new = OwnTask(title: title, body: body, date: date, reminderSet: push)
+                print(newItem)
+                self.ownTaskItems.itemsArray.append(newItem)
+                ownTaskItems.setNotifications()
+                self.ownTaskTableView.reloadData()
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -154,7 +141,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
     
     func checkBoxToggle(sender: MainScreenTableViewCell) {
         if let selectedIndexPath = ownTaskTableView.indexPath(for: sender){
-            models[selectedIndexPath.row].isChecked = !models[selectedIndexPath.row].isChecked
+            ownTaskItems.itemsArray[selectedIndexPath.row].isChecked = !ownTaskItems.itemsArray[selectedIndexPath.row].isChecked
+            print("CHECKED \(ownTaskItems.itemsArray[selectedIndexPath.row].isChecked)")
+            
+            if ownTaskItems.itemsArray[selectedIndexPath.row].isChecked && ownTaskItems.itemsArray[selectedIndexPath.row].reminderSet {
+                ownTaskItems.itemsArray[selectedIndexPath.row].reminderSet = false
+                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [ownTaskItems.itemsArray[selectedIndexPath.row].notificationID!])
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [ownTaskItems.itemsArray[selectedIndexPath.row].notificationID!])
+                
+//                setNotifications()
+            }
             ownTaskTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
         }
         
@@ -168,7 +164,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1{
 //            let today = models.filter{ item in item.date > Date().endOfDay}
-            return models.count
+            return ownTaskItems.itemsArray.count
         } else if tableView.tag == 2{
             return 10
         } else {
@@ -195,10 +191,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
 //                let today = models.filter{ item in item.date > Date().endOfDay}
                 
                 cell.delegate = self
-                cell.titleLabel?.text = models[indexPath.row].title
-                cell.subtitleLabel.text = models[indexPath.row].body
-                cell.dateLabel.text = models[indexPath.row].date.toString()
-                cell.checkBoxButton.isSelected = models[indexPath.row].isChecked
+                cell.titleLabel?.text = ownTaskItems.itemsArray[indexPath.row].title
+                cell.subtitleLabel.text = ownTaskItems.itemsArray[indexPath.row].body
+                cell.dateLabel.text = ownTaskItems.itemsArray[indexPath.row].date.toString()
+                cell.checkBoxButton.isSelected = ownTaskItems.itemsArray[indexPath.row].isChecked
                 
             } else if tableView.tag == 2{
                 
@@ -246,33 +242,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
             vc.title = "Личная задача"
             vc.navigationItem.largeTitleDisplayMode = .never
 //            vc.titleTextField.text = models[selectedIndexPath!.row].title
-            vc.toDoItem = models[selectedIndexPath!.row]
+            vc.toDoItem = ownTaskItems.itemsArray[selectedIndexPath!.row]
             
-            vc.completion = {[unowned self] title, body, date, push in
+            vc.completion = {[unowned self] newItem in
                 DispatchQueue.main.async {
                     self.navigationController?.popToRootViewController(animated: true)
-                    let new = OwnTask(title: title, body: body, date: date, identifier: "id_\(title)")
-                    print(new)
+//                    let new = OwnTask(title: title, body: body, date: date, reminderSet: push)
+                    print(newItem)
 //                    проверить старые уведомления здесь со старыми значениями
 //                    добавить проверку на выполнение isChecked
-                    self.models[selectedIndexPath!.row] = new
+                    self.ownTaskItems.itemsArray[selectedIndexPath!.row] = newItem
+                    self.ownTaskItems.setNotifications()
                     self.ownTaskTableView.reloadData()
 
-                    if push == true{
-                        let content = UNMutableNotificationContent()
-                        content.title = title
-                        content.sound = .default
-                        content.body = body
-
-                        let targetDate = date
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: targetDate), repeats: false)
-                        let request = UNNotificationRequest(identifier: new.identifier, content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request) { error in
-                            if error != nil {
-                                print("something went wrong \(error.debugDescription)")
-                            }
-                        }
-                    }
+//                    if push == true{
+//                        let content = UNMutableNotificationContent()
+//                        content.title = title
+//                        content.sound = .default
+//                        content.body = body
+//
+//                        let targetDate = date
+//                        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: targetDate), repeats: false)
+//                        let request = UNNotificationRequest(identifier: new.identifier, content: content, trigger: trigger)
+//                        UNUserNotificationCenter.current().add(request) { error in
+//                            if error != nil {
+//                                print("something went wrong \(error.debugDescription)")
+//                            }
+//                        }
+//                    }
                 }
             }
             navigationController?.pushViewController(vc, animated: true)
