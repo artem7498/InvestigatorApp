@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VwY-ii-m4C">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="clT-fW-a0s">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pw-c9-uj9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJq-ac-kLu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -173,12 +173,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.92753623188412" y="93.75"/>
+            <point key="canvasLocation" x="1855.072463768116" y="93.75"/>
         </scene>
         <!--Task Editor Table View Controller-->
         <scene sceneID="9Lm-FA-Whe">
             <objects>
-                <tableViewController storyboardIdentifier="TaskEditorTableViewController" id="eUp-y0-xWK" customClass="TaskEditorTableViewController" customModule="InvestigatorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TaskEditorTableViewController" hidesBottomBarWhenPushed="YES" id="eUp-y0-xWK" customClass="TaskEditorTableViewController" customModule="InvestigatorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="szx-A9-JQ4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,7 +193,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KlS-iC-ChK">
-                                                    <rect key="frame" x="20" y="5" width="334" height="34"/>
+                                                    <rect key="frame" x="19" y="5" width="335" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -322,7 +322,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbF-2k-93V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3387" y="94"/>
+            <point key="canvasLocation" x="4297.1014492753629" y="93.75"/>
         </scene>
         <!--Add Task View Controller-->
         <scene sceneID="XRh-Q5-VOH">
@@ -410,10 +410,11 @@
             </objects>
             <point key="canvasLocation" x="945" y="-627"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Главная-->
         <scene sceneID="5R9-PT-kPs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VwY-ii-m4C" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Главная" image="xmark.bin" catalog="system" selectedImage="square.and.arrow.down" id="xLJ-DC-2mZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="piL-Ak-EsV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -426,7 +427,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJo-0v-kgp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34.782608695652179" y="93.75"/>
+            <point key="canvasLocation" x="944.92753623188412" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UDh-3l-wqZ">
@@ -444,14 +445,69 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7bo-Ro-Bz1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2142" y="-247"/>
+            <point key="canvasLocation" x="3050.7246376811595" y="-247.09821428571428"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="osK-Mo-oGq">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="clT-fW-a0s" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YgL-kP-fBO">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="VwY-ii-m4C" kind="relationship" relationship="viewControllers" id="6N2-PZ-YGV"/>
+                        <segue destination="7uV-dQ-ILP" kind="relationship" relationship="viewControllers" id="oPe-aH-5sM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sYc-eN-5tL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-964" y="721"/>
+        </scene>
+        <!--Главная-->
+        <scene sceneID="T6r-Zm-nYO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7uV-dQ-ILP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Главная" id="mN6-R0-uSz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SB0-bp-fyW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yug-41-UWt" kind="relationship" relationship="rootViewController" id="c1A-ko-jNg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mOH-qi-yWZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="945" y="902"/>
+        </scene>
+        <!--Мои дела-->
+        <scene sceneID="qEH-TS-ttW">
+            <objects>
+                <viewController id="Yug-41-UWt" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mLJ-DN-dkN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="X5b-5V-n0a"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Мои дела" id="PzQ-tg-me8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7nz-FM-PSq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1888" y="901"/>
         </scene>
     </scenes>
     <resources>
         <image name="checked_checkbox" width="50" height="50"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sidebar.left" catalog="system" width="128" height="93"/>
+        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="unchecked_checkbox" width="50" height="50"/>
+        <image name="xmark.bin" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

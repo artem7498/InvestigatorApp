@@ -113,6 +113,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		AC4A22CB267C68340094BF80 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC7D52B6266F45B4003E78F0 /* ViewController.swift */,
+				AC2AAEF62677143D005148D3 /* TaskEditorTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		AC7D52A6266F45B4003E78F0 = {
 			isa = PBXGroup;
 			children = (
@@ -138,12 +147,11 @@
 			children = (
 				AC7D52B2266F45B4003E78F0 /* AppDelegate.swift */,
 				AC7D52B4266F45B4003E78F0 /* SceneDelegate.swift */,
-				AC7D52B6266F45B4003E78F0 /* ViewController.swift */,
-				AC2AAEF62677143D005148D3 /* TaskEditorTableViewController.swift */,
-				AC2AAEFA2679F463005148D3 /* OwnTaskItems.swift */,
-				AC2AAEFC2679F721005148D3 /* LocalNotificationManager.swift */,
+				AC4A22CB267C68340094BF80 /* Controllers */,
 				AC7D52F8267337BA003E78F0 /* MainScreenCells */,
+				AC2AAEFA2679F463005148D3 /* OwnTaskItems.swift */,
 				AC7D52EC2671ABBC003E78F0 /* TaskModel.swift */,
+				AC2AAEFC2679F721005148D3 /* LocalNotificationManager.swift */,
 				AC7D52F926733807003E78F0 /* AddTaskViewController.swift */,
 				AC2AAEF326749157005148D3 /* Extensions */,
 				AC7D52B8266F45B4003E78F0 /* Main.storyboard */,
