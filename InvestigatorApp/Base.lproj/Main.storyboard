@@ -11,7 +11,7 @@
         <!--Dashboard-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InvestigatorApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DashboardViewController" customModule="InvestigatorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,7 +196,7 @@
                                                     <rect key="frame" x="19" y="5" width="335" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="eUp-y0-xWK" eventType="editingChanged" id="R1v-fG-vYS"/>
                                                     </connections>
@@ -487,18 +487,107 @@
         <!--Мои дела-->
         <scene sceneID="qEH-TS-ttW">
             <objects>
-                <viewController id="Yug-41-UWt" sceneMemberID="viewController">
+                <viewController id="Yug-41-UWt" customClass="AllCasesViewController" customModule="InvestigatorApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mLJ-DN-dkN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-aW-02I">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseIdentifier" rowHeight="145" id="Lhe-u1-vYL" customClass="AllCasesTableViewCell" customModule="InvestigatorApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="145"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lhe-u1-vYL" id="lVd-bP-KxP">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NIf-60-oMQ">
+                                                    <rect key="frame" x="5" y="5" width="142" height="135"/>
+                                                    <color key="backgroundColor" red="0.71370899909999996" green="1" blue="0.68682421240000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="142" id="2IP-JC-bJg">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="65"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="R3C-lP-42u">
+                                                    <rect key="frame" x="157" y="5" width="252" height="135"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Иванов Иван ИвановичИванов Иван ИвановичИванов Иван ИвановичИванов Иван Иванович" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9a-dh-zgL">
+                                                            <rect key="frame" x="0.0" y="0.0" width="252" height="84"/>
+                                                            <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="20"/>
+                                                            <color key="textColor" red="0.064529565814273868" green="0.15498868473266156" blue="0.29918253241163306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№ 314565345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-ga-nuM">
+                                                            <rect key="frame" x="0.0" y="89" width="252" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.064529565809999995" green="0.15498868469999999" blue="0.29918253239999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.01.2019 - 12.03.2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dug-yO-OTu">
+                                                            <rect key="frame" x="0.0" y="114.5" width="252" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.064529565809999995" green="0.15498868469999999" blue="0.29918253239999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="7bb-ga-nuM" firstAttribute="height" secondItem="M9a-dh-zgL" secondAttribute="height" multiplier="0.244048" id="W6V-iR-8ch"/>
+                                                    </constraints>
+                                                    <variation key="heightClass=regular-widthClass=regular" axis="horizontal"/>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="R3C-lP-42u" firstAttribute="top" secondItem="lVd-bP-KxP" secondAttribute="top" constant="5" id="790-IL-etU">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="NIf-60-oMQ" secondAttribute="bottom" constant="5" id="P5D-xU-5dh"/>
+                                                <constraint firstAttribute="trailing" secondItem="R3C-lP-42u" secondAttribute="trailing" constant="5" id="Qjv-42-0dL">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="R3C-lP-42u" secondAttribute="bottom" constant="5" id="j4m-zb-2Vp">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                                </constraint>
+                                                <constraint firstItem="NIf-60-oMQ" firstAttribute="leading" secondItem="lVd-bP-KxP" secondAttribute="leading" constant="5" id="lbo-Jx-gv0"/>
+                                                <constraint firstItem="R3C-lP-42u" firstAttribute="leading" secondItem="NIf-60-oMQ" secondAttribute="trailing" constant="10" id="tm9-1d-Jf8">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="NIf-60-oMQ" firstAttribute="top" secondItem="lVd-bP-KxP" secondAttribute="top" constant="5" id="vyw-Yu-OHc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="caseImage" destination="NIf-60-oMQ" id="8SK-88-aIp"/>
+                                            <outlet property="dateLabel" destination="dug-yO-OTu" id="UrW-ot-iwV"/>
+                                            <outlet property="nameLabel" destination="M9a-dh-zgL" id="i7x-vj-seQ"/>
+                                            <outlet property="numberLabel" destination="7bb-ga-nuM" id="D5X-jx-9Ix"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yug-41-UWt" id="uDQ-p5-LdT"/>
+                                    <outlet property="delegate" destination="Yug-41-UWt" id="mhT-4f-heG"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="X5b-5V-n0a"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Igx-aW-02I" firstAttribute="leading" secondItem="X5b-5V-n0a" secondAttribute="leading" id="1TS-1u-Fuz"/>
+                            <constraint firstItem="Igx-aW-02I" firstAttribute="top" secondItem="X5b-5V-n0a" secondAttribute="top" id="dFn-4X-5wO"/>
+                            <constraint firstItem="X5b-5V-n0a" firstAttribute="bottom" secondItem="Igx-aW-02I" secondAttribute="bottom" id="jYQ-1i-AnR"/>
+                            <constraint firstItem="X5b-5V-n0a" firstAttribute="trailing" secondItem="Igx-aW-02I" secondAttribute="trailing" id="w7g-ex-6U9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Мои дела" id="PzQ-tg-me8"/>
+                    <connections>
+                        <outlet property="tableView" destination="Igx-aW-02I" id="mEx-sp-aQP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nz-FM-PSq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1888" y="901"/>
+            <point key="canvasLocation" x="1886.9565217391305" y="900.66964285714278"/>
         </scene>
     </scenes>
     <resources>

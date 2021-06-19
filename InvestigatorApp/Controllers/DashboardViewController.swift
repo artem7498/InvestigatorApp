@@ -8,7 +8,7 @@
 //import UserNotifications
 import UIKit
 
-class ViewController: UIViewController {
+class DashboardViewController: UIViewController {
     
 //    var models = [OwnTask]()
     var ownTaskItems = OwnTaskItems.shared
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        print(collectionView.frame.width / 2.5, collectionView.frame.width / 2)
@@ -137,7 +137,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
 }
 
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreenTableViewCellDelegate{
+extension DashboardViewController: UITableViewDelegate, UITableViewDataSource, MainScreenTableViewCellDelegate{
     
     func checkBoxToggle(sender: MainScreenTableViewCell) {
         if let selectedIndexPath = ownTaskTableView.indexPath(for: sender){
@@ -166,7 +166,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, MainScreen
 //            let today = models.filter{ item in item.date > Date().endOfDay}
             return ownTaskItems.itemsArray.count
         } else if tableView.tag == 2{
-            return 10
+            return 5
         } else {
             return 0
         }
